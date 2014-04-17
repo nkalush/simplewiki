@@ -5,7 +5,7 @@ class Routes{
 		
 		$uri=Routes::get_uri();
 		
-		if(isset($uri)){
+		if($uri){
 			$fullpath=Routes::get_file_path($uri);
 			
 			if(!is_file($fullpath)){
@@ -22,7 +22,11 @@ class Routes{
 	}
 	
 	static function get_uri(){
-		return $_SERVER['PATH_INFO'];
+		if(isset($_SERVER['PATH_INFO'])){
+			return $_SERVER['PATH_INFO'];
+		}else{
+			return false;
+		}
 	}
 	
 	static function get_file_path($uri){
